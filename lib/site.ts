@@ -88,15 +88,9 @@ export const about = [
  * drawn from each repository's README and source, since GitHub carries no
  * descriptions.
  *
- * ─────────────────────────────────────────────────────────────
- * TODO(you): the `demo` links
- * ─────────────────────────────────────────────────────────────
- * `demo` is where a live deployment goes. Each card shows a "live" button only
- * when its `demo` is a non-empty string, so an unfilled slot simply leaves the
- * button off rather than shipping a link to nowhere. Paste the URL in and the
- * button appears — no other file needs touching.
- *
- * `href` is the repository, and all three are already correct.
+ * `href` is the repository and `demo` the live deployment. Each card shows a
+ * "live" button only when its `demo` is a non-empty string, so emptying one
+ * leaves the button off rather than shipping a link to nowhere.
  */
 export const projects: Project[] = [
   {
@@ -114,7 +108,7 @@ export const projects: Project[] = [
       "Framed as an educational self-check throughout, never as a diagnosis",
     ],
     href: "https://github.com/Peera-27/dreamviz",
-    demo: "", // TODO(you): live URL
+    demo: "https://dreamviz.vercel.app/",
     colorA: "#8fa8ff",
     colorB: "#2c1a5c",
   },
