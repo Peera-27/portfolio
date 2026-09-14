@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw video/image sources — the encoded versions that actually ship live in
+# /public/media. These are the ~50MB originals, kept locally so a clip can be
+# re-encoded, but never served and never worth pushing on every deploy.
+/asset

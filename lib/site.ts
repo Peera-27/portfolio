@@ -9,6 +9,23 @@ import type { Project } from "@/components/ui/scroll-locked-video-hero"
  * written here, because neither GitHub descriptions nor that config carry any.
  */
 
+/**
+ * Where the site lives once it is deployed. Absolute URLs are required for
+ * Open Graph cards, `robots.txt` and `sitemap.xml` — a relative path in an
+ * og:image tag is ignored by every scraper, so without this a shared link
+ * renders as bare text.
+ *
+ * Resolved in three steps so no one has to remember to set anything:
+ *   1. NEXT_PUBLIC_SITE_URL — set this once a custom domain is attached
+ *   2. the Vercel production domain, injected by the platform at build time
+ *   3. localhost, for `next dev`
+ */
+export const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000")
+
 export const media = {
   /**
    * The hero's scrub track. Its playhead is driven by scroll position, which
@@ -38,13 +55,11 @@ export const profile = {
   location: "Bangkok, TH",
   coordinates: "13.7563° N · 100.5018° E",
   /**
-   * TODO(you): put your email address here.
-   *
-   * Left blank on purpose, matching `app/config.ts` in the Port repo. While it
-   * is empty the contact section drops the mail form and the email card and
-   * lets the social links carry the section, and the header hides its mail
-   * icon — nothing points at an empty `mailto:`. Fill this in and all three
-   * come back on their own.
+   * Every contact affordance on the site points here: the form's `mailto:`, the
+   * email card, and the header's mail icon. All three render only while this is
+   * a non-empty string — emptying it removes them rather than shipping a link
+   * to nowhere, which is why the contact section still holds together on the
+   * social links alone.
    */
   email: "peeraphat.chompoo@gmail.com",
   github: "https://github.com/Peera-27",
@@ -118,7 +133,7 @@ export const projects: Project[] = [
       "Rate limiting, JWT interceptors, Swagger docs, and a Docker plus Render deployment setup",
     ],
     href: "https://github.com/Peera-27/TinnerApp",
-    demo: "https://tinnerapp.onrender.com/", // TODO(you): live URL
+    demo: "https://tinnerapp.onrender.com/",
     colorA: "#ff7a9c",
     colorB: "#5c1830",
   },

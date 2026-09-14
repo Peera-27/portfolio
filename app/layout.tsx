@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Bebas_Neue, DM_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { profile } from "@/lib/site";
+import { profile, siteUrl } from "@/lib/site";
 import { SmoothScroll } from "@/components/site/smooth-scroll";
 
 /**
@@ -34,6 +34,12 @@ const mono = Geist_Mono({
 
 
 export const metadata: Metadata = {
+  /**
+   * Makes every relative URL in this object absolute — including the
+   * `app/opengraph-image.tsx` card, which scrapers drop silently unless the
+   * tag carries a full origin.
+   */
+  metadataBase: new URL(siteUrl),
   title: {
     default: `${profile.nameEn} — ${profile.role}`,
     template: `%s · ${profile.nameEn}`,
@@ -56,7 +62,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: `${profile.nameEn} — ${profile.role}`,
+    description: `${profile.role} · ${profile.headline}`,
+  },
   robots: { index: true, follow: true },
+  alternates: { canonical: "/" },
 };
 
 export const viewport: Viewport = {

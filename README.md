@@ -10,16 +10,19 @@ GSAP for the line-by-line text reveals and the pinned horizontal project ribbon.
 ## Getting started
 
 ```bash
-npm install
-npm run dev      # http://localhost:3000
-npm run build    # production build
-npm start
+bun install
+bun run dev      # http://localhost:3000
+bun run build    # production build
+bun start
 ```
 
-(The repo also has a `bun.lock`; `bun install` / `bun run dev` work equally well.)
+`bun.lock` is the only lockfile in the repo, so a host reading the tree installs with Bun and gets the same dependency
+versions this was built against. npm works too — just don't commit the `package-lock.json` it writes, because two
+lockfiles leave the build platform to guess which one it should trust.
 
 - `/` — the full site (hero + about + projects + skills + contact)
-- `/demo` — the hero on its own, nothing else (the equivalent of `demo.tsx` in the brief), useful while tuning it
+- `/demo` — the hero on its own, nothing else (the equivalent of `demo.tsx` in the brief), useful while tuning it.
+  Nothing links to it and it is `noindex` + disallowed in `robots.txt`, so it stays a workbench rather than a page of the site
 
 ---
 
@@ -221,8 +224,13 @@ announcing the selected project (debounced 400ms so a fast flick does not fire p
 Every route is static (`○ Static`), so Vercel / Netlify / Cloudflare Pages all work as-is.
 
 ```bash
-npm run build && npm start
+bun run build && bun start
 ```
+
+**Set `NEXT_PUBLIC_SITE_URL` to the final domain.** `metadataBase`, `robots.txt` and `sitemap.xml` all read it through
+`siteUrl` in `lib/site.ts`. On Vercel it falls back to the production domain the platform injects, so the site is
+correct without any env var; anywhere else, an unset value means the Open Graph card is advertised at `localhost:3000`
+and no scraper can fetch it.
 
 ## Type
 
