@@ -147,7 +147,7 @@ export const projects: Project[] = [
       "OAuth login, protected routes, and an in-app chatbot for asking about items in words instead of filters",
     ],
     href: "https://github.com/Bannawat01/albion-api",
-    demo: "https://albion-api-seven.vercel.app",
+    demo: "https://www.albion-market-ai.online/th",
     colorA: "#ffc46b",
     colorB: "#7a5410",
   },
